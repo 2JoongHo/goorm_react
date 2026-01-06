@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
+import Form from "./components/Form";
 
 export default function App() {
   const [todoData, setTodoData] = useState([
@@ -16,15 +17,6 @@ export default function App() {
     },
   ]);
 
-  const [value, setValue] = useState("");
-
-
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setValue(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let newTodo = {
@@ -37,6 +29,8 @@ export default function App() {
     setValue("");
   };
 
+  const [value, setValue] = useState("");
+
   return (
     <div className="container">
       <div className="todoBlock">
@@ -46,22 +40,7 @@ export default function App() {
 
         <Lists todoData={todoData} setTodoData={setTodoData} />
 
-        <form style={{ display: "flex" }} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="value"
-            style={{ flex: "10", padding: "5px" }}
-            placeholder="할 일을 입력하세요"
-            value={value}
-            onChange={handleChange}
-          />
-          <input
-            type="submit"
-            value="입력"
-            className="btn"
-            style={{ flex: "1" }}
-          />
-        </form>
+        <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>
     </div>
   );
